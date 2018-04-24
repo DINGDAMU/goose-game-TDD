@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-from asyncDownloader.addtwonum import *
+from goose-game-TDD.addtwonum import *
 class TestClass(unittest.TestCase):
     """Test case docstring."""
     def test_Sample(self):

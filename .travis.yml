@@ -1,7 +1,7 @@
 language: python
 python: 3.6
 before_install: sudo pip install -r requirements.txt
-script: coverage run --source=asyncDownloader setup.py test
+script: coverage run --source=goose-game-TDD setup.py test
 env:
   global:
   - secure: EQLNUOczlCaLZ9Ni+yZypp/QJkLyBRat3uJM112KP68tAt+l00Lb6L4oHnfxEy2NeKNlkfpnyXm1F7v5V0z6dd+iKquy9FZzoJdI89skeo5guI8lF8GVpnZ2UMbJu0xq7c7CEsOwHQN4zzF5G1tC4riuL8EiNZKUCmHkDnN50u5PwqQBEOaFwodd0Z/AY7nbhHvgIwpDf/rzmGZMnFCBMToq6aUpKXm4C6MkP45ZFDWjMSzXhflm+UbPjlukrcqxtWb3vUA0L8/vKJMifu9lQ2H2v4ktYimfqyZm1Ww4LJQIdlFPLZ/Q6+z0v9fHg11NxG6lE5aC0rriQxf3UEWXK/6AemQjEQvMwW37NHSuQc0N2gU/QtSWSuH8b7gusbDooy/vheXObx24Wp1LeP47XAuoF2uFnb8frDybIfo0c7dKAg1Z6vydsdnQE2AxukzFTFa+vOIxJ9yf2lZjZ568vRiHMkDq4T2q7dyC9E5eqLniZMcubPjzU533GeSUoM7hslptSdmfGAVhlSGxQybv+f45vHk+/zFEBKLEbaFQ5bZZR82GLuftzItHFPAjS8JFePm+BlImXPTI2caZfRmk6L8CAhxQ28IcYWFtw/CZZDXyfq7TalVUFc0RqLZ+XTCl0dZBU35FRPpGt0VYtsuvIcPHADLqYDW/XgKlaCg9Yto=
