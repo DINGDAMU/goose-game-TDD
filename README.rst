@@ -1,5 +1,5 @@
-asyncDownloader
-===============
+goose-game-TDD
+==============
 
 .. image:: https://www.travis-ci.org/DINGDAMU/asyncDownloader.png 
    :target: https://www.travis-ci.org/DINGDAMU/asyncDownloader  
@@ -27,4 +27,4 @@ Licence
 Authors
 -------
 
-`asyncDownloader` was written by `DAMU DING <dingdamu@gmail.com>`_.
+`goose-game-TDD` was written by `DAMU DING <dingdamu@gmail.com>`_.

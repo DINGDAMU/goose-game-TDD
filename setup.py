@@ -1,9 +1,9 @@
 import setuptools
 
 setuptools.setup(
-    name="asyncDownloader",
+    name="goose-game-TDD",
     version="0.0.1",
-    url="https://github.com/DINGDAMU/asyncDownloader",
+    url="https://github.com/DINGDAMU/goose-game-TDD",
 
     author="DAMU DING",
     author_email="dingdamu@gmail.com",
