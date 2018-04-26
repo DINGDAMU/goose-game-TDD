@@ -4,7 +4,7 @@ goose-game-TDD
 .. image:: https://www.travis-ci.org/DINGDAMU/goose-game-TDD.png 
    :target: https://www.travis-ci.org/DINGDAMU/goose-game-TDD  
    :alt: Latest Travis CI build status
-.. image:: https://coveralls.io/repos/github/DINGDAMU/goose-game-TDD/badge.svg?branch=master
+.. image:: https://coveralls.io/repos/github/DINGDAMU/goose-game-TDD/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/DINGDAMU/goose-game-TDD?branch=master
 
 A TDD exercise
