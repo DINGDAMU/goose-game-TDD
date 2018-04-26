@@ -143,10 +143,16 @@ there is Pluto, who returns to 15", steps)
 
         """
         goose = GooseGame()
-        num1 = 1
-        num2 = 2
-        goose.dice_roll = Mock(return_value="1, 2")
-        self.assertEqual(str(num1) + ", " + str(num2), goose.dice_roll())
+        rolls = goose.dice_roll()
+        roll_num = str(rolls).split(", ")
+        num1 = roll_num[0]
+        num2 = roll_num[1]
+        num = int(num1) + int(num2)
+        result = False
+        for i in range(2, 13):
+            if i == num:
+                result = True
+        self.assertTrue(result)
 
 
 if __name__ == "__main__":
