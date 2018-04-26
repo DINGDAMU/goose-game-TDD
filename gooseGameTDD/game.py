@@ -85,7 +85,6 @@ class GooseGame(object):
             info3 = "{name} moves again and goes to {pictureSteps}".format(
                 name=player_name, pictureSteps=picture_steps)
             results += info2+", The Goose. "+info3
-            self.playersteps[player_name] = picture_steps
             while (picture_steps == 9 or picture_steps == 14
                    or picture_steps == 18 or picture_steps == 23
                    or picture_steps == 27):
@@ -93,14 +92,21 @@ class GooseGame(object):
                 info3 = ", The Goose. " + "{name} moves again and\
  goes to {pictureSteps}".format(name=player_name, pictureSteps=picture_steps)
                 results += info3
+            self.playersteps[player_name] = picture_steps
             return results
 
-            return results
+        for name in self.names:
+            if self.playersteps[name] == current_steps:
+                prank_steps = current_steps - move_steps_sum
+                info4 = "On {position} there is {name_player}, who returns to\
+ {prank}".format(position=current_steps, name_player=name, prank=prank_steps)
+                return info1 + " " + info2 + ". " + info4
+
         if current_steps == 63:
             self.playersteps[player_name] = current_steps
             return info1 + " " + info2 + "." + "{name} Wins!!".format(
                 name=player_name)
-        if current_steps > 63:
+        elif current_steps > 63:
             back_steps = current_steps - 63
             current_steps = 63 - back_steps
             info2 = "{name} moves from {start} to {current}".format(

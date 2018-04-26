@@ -109,6 +109,18 @@ class TestGame(unittest.TestCase):
  Pippo moves again and goes to 18, The Goose. Pippo moves again\
  and goes to 22", steps)
 
+    def testPrank(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.add("add player Pluto")
+        goose.move_players("move Pippo 10, 5")
+        goose.move_players("move Pluto 7, 10")
+        goose.dice_roll = Mock(return_value="1, 1")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("Pippo rolls 1, 1. Pippo moves from 15 to 17. On 17 \
+there is Pluto, who returns to 15", steps)
+
 
 if __name__ == "__main__":
     unittest.main()
