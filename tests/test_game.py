@@ -8,6 +8,7 @@
 # ###########################
 
 import unittest
+from mock import Mock
 from gooseGameTDD.game import *
 
 
@@ -48,7 +49,7 @@ class TestGame(unittest.TestCase):
     def testMovePippoFromSix(self):
         goose = GooseGame()
         goose.add("add player Pippo")
-        steps = goose.move_players("move Pippo 4, 2")
+        goose.move_players("move Pippo 4, 2")
         steps = goose.move_players("move Pippo 2, 3")
         self.assertEqual("Pippo rolls 2, 3. Pippo moves from 6 to 11.",
                          steps)
@@ -56,7 +57,7 @@ class TestGame(unittest.TestCase):
     def testVictory(self):
         goose = GooseGame()
         goose.add("add player Pippo")
-        steps = goose.move_players("move Pippo 30, 30")
+        goose.move_players("move Pippo 30, 30")
         steps = goose.move_players("move Pippo 1, 2")
         self.assertEqual("Pippo rolls 1, 2. Pippo moves from 60 to 63." +
                          "Pippo Wins!!", steps)
@@ -64,10 +65,49 @@ class TestGame(unittest.TestCase):
     def testBounces(self):
         goose = GooseGame()
         goose.add("add player Pippo")
-        steps = goose.move_players("move Pippo 30, 30")
+        goose.move_players("move Pippo 30, 30")
         steps = goose.move_players("move Pippo 3, 2")
         self.assertEqual("Pippo rolls 3, 2. Pippo moves from 60 to 63. " +
                          "Pippo bounces! Pippo returns to 61", steps)
+    def testDice(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.move_players("move Pippo 2, 2")
+        goose.dice_roll = Mock(return_value="1, 2")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("Pippo rolls 1, 2. Pippo moves from 4 to 7.", steps)
+
+    def testBridge(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.move_players("move Pippo 2, 2")
+        goose.dice_roll = Mock(return_value="1, 1")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("Pippo rolls 1, 1. Pippo moves from 4 to The Bridge.\
+ Pippo jumps to 12", steps)
+
+    def testPictureJumps(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.move_players("move Pippo 1, 2")
+        goose.dice_roll = Mock(return_value="1, 1")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("Pippo rolls 1, 1. Pippo moves from 3 to 5, The Goose.\
+ Pippo moves again and goes to 7", steps)
+
+    def testMultiplePictureJumps(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.move_players("move Pippo 5, 5")
+        goose.dice_roll = Mock(return_value="2, 2")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("Pippo rolls 2, 2. Pippo moves from 10 to 14, The Goose.\
+ Pippo moves again and goes to 18, The Goose. Pippo moves again\
+ and goes to 22", steps)
 
 
 if __name__ == "__main__":

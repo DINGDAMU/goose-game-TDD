@@ -6,6 +6,7 @@
 # Mail: dingdamu@gmail.com
 # Created Time: 2018-04-24 22:28:09
 # ###########################
+import random
 
 
 class GooseGame(object):
@@ -47,8 +48,9 @@ class GooseGame(object):
         move_player_details = move_steps.split(" ")
         move_steps_in_number = move_player_details[2].split(",")
         player_name = move_player_details[1]
-        move_steps_sum = int(move_steps_in_number[0])+int(
-            move_player_details[3])
+        step1 = move_steps_in_number[0]
+        step2 = move_player_details[3]
+        move_steps_sum = int(step1) + int(step2)
         if self.playersteps[player_name] == "Start":
             info1 = "{name} rolls {details}.".format(
                 name=player_name, details=move_player_details[2]
@@ -66,6 +68,34 @@ class GooseGame(object):
         info2 = "{name} moves from {start} to {current}".format(
             name=player_name, start=self.playersteps[player_name],
             current=current_steps)
+        if current_steps == 6:
+            info2 = "{name} moves from {start} to {current}".format(
+                name=player_name, start=self.playersteps[player_name],
+                current="The Bridge")
+            info3 = "{name} jumps to {jumps}".format(name=player_name,
+                                                     jumps=12)
+            self.playersteps[player_name] = 12
+            return info1+" "+info2+". "+info3
+
+        results = info1+" "
+        if current_steps == 5 or current_steps == 9 or current_steps == 14\
+           or current_steps == 18 or current_steps == 23\
+                or current_steps == 27:
+            picture_steps = current_steps + move_steps_sum
+            info3 = "{name} moves again and goes to {pictureSteps}".format(
+                name=player_name, pictureSteps=picture_steps)
+            results += info2+", The Goose. "+info3
+            self.playersteps[player_name] = picture_steps
+            while (picture_steps == 9 or picture_steps == 14
+                   or picture_steps == 18 or picture_steps == 23
+                   or picture_steps == 27):
+                picture_steps += move_steps_sum
+                info3 = ", The Goose. " + "{name} moves again and\
+ goes to {pictureSteps}".format(name=player_name, pictureSteps=picture_steps)
+                results += info3
+            return results
+
+            return results
         if current_steps == 63:
             self.playersteps[player_name] = current_steps
             return info1 + " " + info2 + "." + "{name} Wins!!".format(
@@ -82,3 +112,12 @@ class GooseGame(object):
                     name=player_name, current=current_steps)
 
         return info1 + " " + info2+"."
+
+    def dice_roll(self):
+        """dice roll two times
+        :returns: dice results
+
+        """
+        num1 = random.randint(1, 6)
+        num2 = random.randint(1, 6)
+        return str(num1)+", "+str(num2)

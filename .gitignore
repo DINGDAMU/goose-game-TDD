@@ -39,3 +39,4 @@ nosetests.xml
 .coveralls.yml
 .ropeproject
 .pytest_cache
+.python-version
