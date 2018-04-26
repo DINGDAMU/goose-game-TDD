@@ -137,6 +137,17 @@ there is Pluto, who returns to 15", steps)
         steps = goose.move_players(move_commands)
         self.assertEqual("The game is finished!", steps)
 
+    def testDiceRoll(self):
+        """test Dice Rolls
+        :returns: the dice result
+
+        """
+        goose = GooseGame()
+        num1 = 1
+        num2 = 2
+        goose.dice_roll = Mock(return_value="1, 2")
+        self.assertEqual(str(num1) + ", " + str(num2), goose.dice_roll())
+
 
 if __name__ == "__main__":
     unittest.main()
