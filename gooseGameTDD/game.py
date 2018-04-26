@@ -57,14 +57,28 @@ class GooseGame(object):
                 name=player_name, start=self.playersteps[player_name],
                 current=move_steps_sum)
             self.playersteps[player_name] = move_steps_sum
-            return info1+" "+info2
+            return info1+" "+info2+"."
 
         info1 = "{name} rolls {details}.".format(
             name=player_name, details=move_player_details[2]
             + " " + move_player_details[3])
+        current_steps = self.playersteps[player_name]+move_steps_sum
         info2 = "{name} moves from {start} to {current}".format(
             name=player_name, start=self.playersteps[player_name],
-            current=self.playersteps[player_name]+move_steps_sum)
-        self.playersteps[player_name] += move_steps_sum
+            current=current_steps)
+        if current_steps == 63:
+            self.playersteps[player_name] = current_steps
+            return info1 + " " + info2 + "." + "{name} Wins!!".format(
+                name=player_name)
+        if current_steps > 63:
+            back_steps = current_steps - 63
+            current_steps = 63 - back_steps
+            info2 = "{name} moves from {start} to {current}".format(
+                name=player_name, start=self.playersteps[player_name],
+                current=63)
+            self.playersteps[player_name] = current_steps
+            return info1 + " " + info2 + ". " +\
+                "{name} bounces! {name} returns to {current}".format(
+                    name=player_name, current=current_steps)
 
-        return info1 + " " + info2
+        return info1 + " " + info2+"."
