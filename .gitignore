@@ -40,3 +40,4 @@ nosetests.xml
 .ropeproject
 .pytest_cache
 .python-version
+play_game.py
