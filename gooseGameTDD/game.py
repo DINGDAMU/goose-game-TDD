@@ -15,6 +15,7 @@ class GooseGame(object):
         self.result = 'players:'
         self.names = []
         self.playersteps = {}
+        self.terminate = 0
 
     def add(self, command):
         """add player's name
@@ -45,6 +46,9 @@ class GooseGame(object):
         :returns: the current player's steps
 
         """
+        if self.terminate == 1:
+            return "The game is finished!"
+
         move_player_details = move_steps.split(" ")
         move_steps_in_number = move_player_details[2].split(",")
         player_name = move_player_details[1]
@@ -104,6 +108,7 @@ class GooseGame(object):
 
         if current_steps == 63:
             self.playersteps[player_name] = current_steps
+            self.terminate = 1
             return info1 + " " + info2 + "." + "{name} Wins!!".format(
                 name=player_name)
         elif current_steps > 63:
@@ -117,6 +122,7 @@ class GooseGame(object):
                 "{name} bounces! {name} returns to {current}".format(
                     name=player_name, current=current_steps)
 
+        self.playersteps[player_name] = current_steps
         return info1 + " " + info2+"."
 
     def dice_roll(self):

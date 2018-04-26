@@ -121,6 +121,22 @@ class TestGame(unittest.TestCase):
         self.assertEqual("Pippo rolls 1, 1. Pippo moves from 15 to 17. On 17 \
 there is Pluto, who returns to 15", steps)
 
+    def testTerminate(self):
+        """chekc if terminate works
+        :returns: terminate or not
+
+        """
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        goose.add("add player Pluto")
+        goose.move_players("move Pippo 30, 30")
+        goose.dice_roll = Mock(return_value="1, 2")
+        move_commands = "move Pippo " + str(goose.dice_roll())
+        goose.move_players(move_commands)
+        move_commands = "move Pluto " + str(goose.dice_roll())
+        steps = goose.move_players(move_commands)
+        self.assertEqual("The game is finished!", steps)
+
 
 if __name__ == "__main__":
     unittest.main()
