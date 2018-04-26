@@ -10,31 +10,48 @@
 import unittest
 from gooseGameTDD.game import *
 
+
 class TestGame(unittest.TestCase):
 
     """Test game"""
 
     def testAddOneName(self):
         goose = GooseGame()
-        self.assertEqual("players: Pippo",goose.add("add player Pippo"))
-        pass
+        self.assertEqual("players: Pippo", goose.add("add player Pippo"))
 
     def testAddTwoNames(self):
-        goose =  GooseGame()
+        goose = GooseGame()
         goose.add("add player Pippo")
         result = goose.add("add player Pluto")
         self.assertEqual("players: Pippo, Pluto", result)
-        pass
 
     def testAddDuplicatedName(self):
         goose = GooseGame()
         goose.add("add player Pippo")
         result = goose.add("add player Pippo")
         self.assertEqual("Pippo: already existing player", result)
-        pass
 
-    def test_name(self):
-        pass
+    def testMovePippoFromStart(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        steps = goose.move_players("move Pippo 4, 2")
+        self.assertEqual("Pippo rolls 4, 2. Pippo moves from Start to 6",
+                         steps)
+
+    def testMovePlutoFromStart(self):
+        goose = GooseGame()
+        goose.add("add player Pluto")
+        steps = goose.move_players("move Pluto 2, 2")
+        self.assertEqual("Pluto rolls 2, 2. Pluto moves from Start to 4",
+                         steps)
+
+    def testMovePippoFromSix(self):
+        goose = GooseGame()
+        goose.add("add player Pippo")
+        steps = goose.move_players("move Pippo 4, 2")
+        steps = goose.move_players("move Pippo 2, 3")
+        self.assertEqual("Pippo rolls 2, 3. Pippo moves from 6 to 11",
+                         steps)
 
 
 if __name__ == "__main__":
